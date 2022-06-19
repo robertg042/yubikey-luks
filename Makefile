@@ -8,9 +8,11 @@ VERSION=0.5.1
 SRC_DIR = yubikey-luks-${VERSION}
 
 debianize:
+	mkdir -p /tmp/yubikey-luks-0/
+	cp -r * /tmp/yubikey-luks-0/
 	rm -fr DEBUILD
 	mkdir -p DEBUILD/${SRC_DIR}
-	cp -r * DEBUILD/${SRC_DIR} || true
+	mv /tmp/yubikey-luks-0/* DEBUILD/${SRC_DIR} || true
 	(cd DEBUILD; tar -zcf yubikey-luks_${VERSION}.orig.tar.gz --exclude=${SRC_DIR}/debian  ${SRC_DIR})
 
 builddeb:
